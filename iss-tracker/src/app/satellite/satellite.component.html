@@ -3,7 +3,14 @@
         <h1> {{satelliteInfo.name}} Satellite Tracker</h1>
     </div>
     <div>
-        <dp-date-picker [(ngModel)]="selectedDate" [config]="datePickerConfig"></dp-date-picker> 
+    <mat-form-field>
+        <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date & time" [(ngModel)]="myDatePicker" 
+        (ngModelChange)="updateDateTime()">
+    
+        <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
+    
+        <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+    </mat-form-field>
     </div>
 </div>
 

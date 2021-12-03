@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { IDatePickerConfig } from 'ng2-date-picker';
 import { SatelliteService } from './satellite.service';
+import * as moment from 'moment';
 
 
 @Component({
@@ -10,10 +12,8 @@ import { SatelliteService } from './satellite.service';
 export class SatelliteComponent implements OnInit {
 
   satelliteInfo: any = {};
-  selectedDate: any;
-  datePickerConfig: any = {
-
-  };
+  myDatePicker: any;
+  satellitePositions: any[] = []
   constructor(private satelliteService: SatelliteService) { }
 
   ngOnInit(){
@@ -25,17 +25,33 @@ export class SatelliteComponent implements OnInit {
   getSatelliteInfo(){
     this.satelliteService.getSatelliteInfo().subscribe((resp: any) => {
       this.satelliteInfo = resp
-      console.log("RESP: " + JSON.stringify(this.satelliteInfo));
+      console.log("satelliteInfo: " + JSON.stringify(this.satelliteInfo));
       }
     );
   }
 
   getSatellitePosition(timestamp: any){
     this.satelliteService.getSatellitePosition(timestamp).subscribe((resp: any) => {
-      this.satelliteInfo = resp
-      console.log("RESP: " + JSON.stringify(this.satelliteInfo));
+      this.satellitePositions = resp
+      console.log("satellitePositions: " + JSON.stringify(this.satellitePositions));
       }
     );
+  }
+
+  updateDateTime(){
+    let currentDateTime = moment(this.myDatePicker).format('X');
+    let tenMinutesAgo = moment(this.myDatePicker).subtract('10', 'minutes').format('X');
+    let nextOneHour = moment(this.myDatePicker).add('1', 'hour').format('X');
+    console.log("Current: " + JSON.stringify(currentDateTime));
+    console.log("tenMinutesAgo: " + JSON.stringify(tenMinutesAgo));
+    console.log("nextOneHour: " + JSON.stringify(nextOneHour));
+
+    let timestamps: any[] = []
+    timestamps.push(tenMinutesAgo, currentDateTime, nextOneHour) ;
+    let param = timestamps.join();
+    console.log("timestamp array: " + JSON.stringify(param));
+
+    this.getSatellitePosition(param);
   }
 
 }
