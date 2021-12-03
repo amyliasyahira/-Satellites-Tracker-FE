@@ -1,0 +1,20 @@
+<h3>Satellite Information</h3>
+<div *ngIf="satellitePositions.length > 0">
+    <div *ngFor="let item of satellitePositions; index as i">
+        <div class="wrapper-info">
+            <div class="table-header">
+                <p>Time</p>
+                <p>Name</p>
+                <p>Latitude</p>
+                <p>Longitude</p>
+            </div>
+            <div class="table-body">
+                <p>{{item.time}}</p>
+                <p>{{item.name}}</p>
+                <p>{{item.latitude}}</p>
+                <p>{{item.longitude}}</p>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -2,7 +2,7 @@
     <div class="header">
         <h1> {{satelliteInfo.name}} Satellite Tracker</h1>
     </div>
-    <div>
+    <div class="date-picker">
     <mat-form-field>
         <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date & time" [(ngModel)]="myDatePicker" 
         (ngModelChange)="updateDateTime()">
@@ -11,6 +11,14 @@
     
         <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
     </mat-form-field>
+    </div>
+    <div class="satellite-info">
+        <div class="info">
+            <app-info [(satellitePositions)]="satellitePositions" (satelliteInfoChange)="doNothing()"></app-info>
+        </div>
+        <div class="map">
+            <app-map [(satelliteCoordinates)]="satelliteCoordinates" [(myDatePicker)]="myDatePicker"></app-map>
+        </div>
     </div>
 </div>
 

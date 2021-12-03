@@ -1,0 +1,9 @@
+.wrapper-info{
+    border: solid 1px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.table-body{
+    margin-left: 10px;
+}

@@ -16,11 +16,17 @@ import {
   NgxMatNativeDateModule,
   NgxMatTimepickerModule,
 } from '@angular-material-components/datetime-picker';
+import { MapComponent } from './map/map.component';
+import { InfoComponent } from './info/info.component';
+import {MatTableModule} from '@angular/material/table';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    SatelliteComponent
+    SatelliteComponent,
+    MapComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +41,8 @@ import {
     ReactiveFormsModule,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
-    NgxMatNativeDateModule
+    NgxMatNativeDateModule,
+    MatTableModule
   ],
   exports: [ MatFormFieldModule, MatInputModule ],
   providers: [],

@@ -14,12 +14,12 @@ export class SatelliteComponent implements OnInit {
   satelliteInfo: any = {};
   myDatePicker: any;
   satellitePositions: any[] = []
+  satelliteCoordinates: any[] = []
   constructor(private satelliteService: SatelliteService) { }
 
   ngOnInit(){
     console.log("Page OnInit..")
     this.getSatelliteInfo();
-    this.getSatellitePosition('1436029892');
   }
 
   getSatelliteInfo(){
@@ -32,7 +32,9 @@ export class SatelliteComponent implements OnInit {
 
   getSatellitePosition(timestamp: any){
     this.satelliteService.getSatellitePosition(timestamp).subscribe((resp: any) => {
-      this.satellitePositions = resp
+      this.satellitePositions = resp;
+
+      this.getFlightCoordinates(this.satellitePositions);
       console.log("satellitePositions: " + JSON.stringify(this.satellitePositions));
       }
     );
@@ -52,6 +54,22 @@ export class SatelliteComponent implements OnInit {
     console.log("timestamp array: " + JSON.stringify(param));
 
     this.getSatellitePosition(param);
+  }
+
+  doNothing(){
+    return null;
+  }
+
+  getFlightCoordinates(data: any[]){
+    let coordinates = [];
+    for(const item of data){
+      let coordinate: any = {
+        lat: item.latitude,
+        lng: item.longtitude
+      }
+      coordinates.push(coordinate);
+    }
+    this.satelliteCoordinates = coordinates;
   }
 
 }
